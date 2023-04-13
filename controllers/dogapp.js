@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req,res) => {
     try{
-        res.send("GET ROUTE!")
+        res.json(await Dog.find({}))
     } catch (error){
         res.status(400).json(error)
     }
@@ -14,8 +14,7 @@ router.get("/", async (req,res) => {
 
 router.get("/:id", async(req,res) => {
     try{
-        res.json(`id show route ${req.params.id}`)
-        //res.json(await Dog.findById(req.params.id))
+        res.json(await Dog.findById(req.params.id))
     } catch (error){
         res.status(400).json(error)
     }
@@ -24,7 +23,7 @@ router.get("/:id", async(req,res) => {
 //create
 router.post("/", async(req,res) => {
     try{
-        res.json(`post route!~`)
+        res.json(await Dog.create(req.body))
     } catch (error){
         res.status(400).json(error)
     }
