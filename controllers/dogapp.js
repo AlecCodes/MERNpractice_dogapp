@@ -31,10 +31,17 @@ router.post("/", async(req,res) => {
 
 router.put("/:id", async(req,res) => {
     try {
-        res.json(`put route`)
+        res.json(await Dog.findByIdAndUpdate(req.params.id, req.body, {new : true}))
     } catch (error){
         res.status(400).json(error)
     }
 }) 
 
+router.delete("/:id", async(req,res) => {
+    try{
+        res.json(await Dog.findByIdAndDelete(req.params.id))
+    } catch(error){
+        res.status(400).json(error)
+    }
+})
 module.exports = router
